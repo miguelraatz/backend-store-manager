@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-  const [products] = await connection.execute('SELECT * FROM StoreManager.products;');
+  const [products] = await connection.execute('SELECT * FROM StoreManager.products ORDER BY id;');
   return products;
 };
 
@@ -18,4 +18,26 @@ const createProduct = async ({ name }) => {
   return { id: insertId, name };
 };
 
-module.exports = { getAll, getById, createProduct };
+const insertDateSales = async () => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO StoreManager.sales (date) VALUES (NOW())',
+  );
+  return insertId;
+};
+
+const registerSales = async (idSale, productId, quantity) => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
+    [idSale, productId, quantity],
+  );
+
+  return insertId;
+};
+
+module.exports = {
+  getAll,
+  getById,
+  createProduct,
+  registerSales,
+  insertDateSales,
+};

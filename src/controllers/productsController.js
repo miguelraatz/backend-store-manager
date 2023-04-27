@@ -18,4 +18,13 @@ const createProduct = async (req, res) => {
   return res.status(201).json(result.message);
 };
 
-module.exports = { getAll, getById, createProduct };
+const registerSales = async (req, res) => {
+  const product = req.body;
+  const { type, statusCode, message } = await productsService.registerSales(product);
+  if (type === 'ERROR') {
+    return res.status(statusCode).json({ message: 'Product not found' });
+  }
+  return res.status(statusCode).json(message);
+};
+
+module.exports = { getAll, getById, createProduct, registerSales };
