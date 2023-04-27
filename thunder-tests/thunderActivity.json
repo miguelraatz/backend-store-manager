@@ -36,5 +36,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "a059350a-9473-4d01-8132-a45f3070c592",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3001/sales",
+    "url": "http://localhost:3001/sales/10",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-27T21:06:55.290Z",
+    "modified": "2023-04-27T22:34:19.218Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

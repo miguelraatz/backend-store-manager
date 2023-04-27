@@ -27,4 +27,28 @@ const registerSales = async (req, res) => {
   return res.status(statusCode).json(message);
 };
 
-module.exports = { getAll, getById, createProduct, registerSales };
+const getAllSales = async (_req, res) => {
+  const { type, statusCode, message } = await productsService.getAllSales();
+  if (type === 'ERROR') {
+    return res.status(statusCode).json({ message: 'Sale not found' });
+  }
+  return res.status(statusCode).json(message);
+};
+
+const getSalesById = async (req, res) => {
+  const { id } = req.params;
+  const { type, statusCode, message } = await productsService.getSalesById(id);
+  if (type === 'ERROR') {
+    return res.status(statusCode).json({ message: 'Sale not found' });
+  }
+  return res.status(statusCode).json(message);
+};
+
+module.exports = {
+  getAll,
+  getById,
+  createProduct,
+  registerSales,
+  getAllSales,
+  getSalesById,
+};

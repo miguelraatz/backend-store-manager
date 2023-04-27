@@ -30,4 +30,24 @@ const registerSales = async (body) => {
   return { type: 'SUCCESS', statusCode: 201, message: insert };
 };
 
-module.exports = { getAll, getById, createProduct, registerSales };
+const getAllSales = async () => {
+  const sales = await productsModel.getAllSales();
+  return { type: 'SUCESS', statusCode: 200, message: sales };
+};
+
+const getSalesById = async (idSale) => {
+  const sale = await productsModel.getSalesById(idSale);
+  if (sale.length === 0) {
+    return { type: 'ERROR', statusCode: 404 };
+  }
+  return { type: 'SUCESS', statusCode: 200, message: sale };
+};
+
+module.exports = {
+  getAll,
+  getById,
+  createProduct,
+  registerSales,
+  getAllSales,
+  getSalesById,
+};
