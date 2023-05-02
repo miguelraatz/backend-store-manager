@@ -44,6 +44,16 @@ const getSalesById = async (req, res) => {
   return res.status(statusCode).json(message);
 };
 
+const editedProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const product = await productsService.editedProduct(id, name);
+  if (product.type) {
+    return res.status(product.statusCode).json({ message: product.message });
+  }
+  return res.status(product.statusCode).json(product.newName);
+};
+
 module.exports = {
   getAll,
   getById,
@@ -51,4 +61,5 @@ module.exports = {
   registerSales,
   getAllSales,
   getSalesById,
+  editedProduct,
 };

@@ -56,6 +56,14 @@ const getSalesById = async (idSale) => {
   return camelize(result);
 };
 
+const editedProduct = async (id, name) => {
+  const [{ affectedRows }] = await connection.execute(
+    `UPDATE StoreManager.products SET name = ?
+     WHERE id = ?;`, [name, id],
+  );
+  return affectedRows;
+};
+
 module.exports = {
   getAll,
   getById,
@@ -64,4 +72,5 @@ module.exports = {
   insertDateSales,
   getAllSales,
   getSalesById,
+  editedProduct,
 };

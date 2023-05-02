@@ -43,6 +43,14 @@ const getSalesById = async (idSale) => {
   return { type: 'SUCESS', statusCode: 200, message: sale };
 };
 
+const editedProduct = async (id, name) => {
+  const result = await productsModel.editedProduct(id, name);
+  if (!result) {
+    return { type: 'ERROR', statusCode: 404, message: 'Product not found' };
+  }
+  return { type: null, statusCode: 200, newName: { id, name } };
+};
+
 module.exports = {
   getAll,
   getById,
@@ -50,4 +58,5 @@ module.exports = {
   registerSales,
   getAllSales,
   getSalesById,
+  editedProduct,
 };
